@@ -16,5 +16,9 @@ public final class ConfigureManager {
     public func applyColors(_ theme: ThemeColorConfigure) {
         TormyColors.configure(theme: theme)
     }
+    
+    public func applyFont(themeFont: ThemeFontConfigure, themeFontSize: ThemeFontSizeConfigure) {
+        TormyFonts.configure(themeFont: themeFont, themeFontSize: themeFontSize)
+    }
 
 }
