@@ -19,10 +19,12 @@ let package = Package(
         .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.7.1")
     ],
     targets: [
-        // UIKit target
         .target(
             name: "TormyUIKit",
-            dependencies: ["SnapKit"]
-        ),
+            dependencies: ["SnapKit"],
+            resources: [
+                .process("Resources") // Resource klasörü burada işlenecek
+            ]
+        )
     ]
 )

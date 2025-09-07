@@ -40,8 +40,9 @@ public struct ColorConfigure {
     
     public var error: String?
     public var success: String?
+    public var warning: String?
     
-    public init(background: String? = nil, containerColor: String? = nil, borderColor: String? = nil, textFieldColor: String? = nil, primary900: String? = nil, primary800: String? = nil, primary700: String? = nil, primary600: String? = nil, primary500: String? = nil, primary400: String? = nil, primary300: String? = nil, primary200: String? = nil, primary100: String? = nil, primary50: String? = nil, greyScale900: String? = nil, greyScale800: String? = nil, greyScale700: String? = nil, greyScale600: String? = nil, greyScale500: String? = nil, greyScale400: String? = nil, greyScale300: String? = nil, greyScale200: String? = nil, greyScale100: String? = nil, greyScale50: String? = nil, black: String? = nil, white: String? = nil, error: String? = nil, success: String? = nil) {
+    public init(background: String? = nil, containerColor: String? = nil, borderColor: String? = nil, textFieldColor: String? = nil, primary900: String? = nil, primary800: String? = nil, primary700: String? = nil, primary600: String? = nil, primary500: String? = nil, primary400: String? = nil, primary300: String? = nil, primary200: String? = nil, primary100: String? = nil, primary50: String? = nil, greyScale900: String? = nil, greyScale800: String? = nil, greyScale700: String? = nil, greyScale600: String? = nil, greyScale500: String? = nil, greyScale400: String? = nil, greyScale300: String? = nil, greyScale200: String? = nil, greyScale100: String? = nil, greyScale50: String? = nil, black: String? = nil, white: String? = nil, error: String? = nil, success: String? = nil, warning: String? = nil) {
         self.background = background
         self.containerColor = containerColor
         self.borderColor = borderColor
@@ -70,6 +71,7 @@ public struct ColorConfigure {
         self.white = white
         self.error = error
         self.success = success
+        self.warning = warning
     }
 }
 
@@ -113,6 +115,7 @@ public struct TormyColors {
     
     private static var _error: UIColor = UIColor(hex: defaultColor)
     private static var _success: UIColor = UIColor(hex: defaultColor)
+    private static var _warning: UIColor = UIColor(hex: defaultColor)
     
     private init() {}
     
@@ -157,6 +160,7 @@ public struct TormyColors {
         // Status
         _error = UIColor(hex: theme.error ?? defaultColor)
         _success = UIColor(hex: theme.success ?? defaultColor)
+        _warning = UIColor(hex: theme.success ?? defaultColor)
     }
     
     
@@ -192,5 +196,6 @@ public struct TormyColors {
     
     public static var error: UIColor { _error }
     public static var success: UIColor { _success }
+    public static var warning: UIColor { _warning }
 }
 

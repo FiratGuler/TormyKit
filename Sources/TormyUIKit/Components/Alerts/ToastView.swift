@@ -7,18 +7,26 @@
 
 import UIKit
 
-final class ToastView: UIView {
+public final class ToastView: UIView {
     
-    enum ToastStatus {
+    public enum ToastStatus {
         case success
         case warning
         case error
+        
+        var iconName: String {
+            switch self {
+            case .success: return "icon_success"
+            case .warning: return "icon_warning"
+            case .error: return "icon_error"
+            }
+        }
     }
     
     private let iconView = UIImageView()
     private let label = UILabel()
     
-    init(message: String, status: ToastStatus) {
+    public init(message: String, status: ToastStatus) {
         super.init(frame: .zero)
         setupUI(message: message, status: status)
     }
@@ -39,18 +47,11 @@ final class ToastView: UIView {
     
     private func configureIconView(status: ToastStatus) {
         iconView.contentMode = .scaleAspectFit
+        iconView.image = UIImage(named: status.iconName, in: .module, compatibleWith: nil)
         
-        switch status {
-        case .success:
-            iconView.image = TormyUIKit.safeImage("icon_circle_check")
-            
-        case .warning:
-            iconView.image = TormyUIKit.safeImage("icon_circle_exclamation")
-                .withRenderingMode(.alwaysTemplate)
-            iconView.tintColor = .yellow
-            
-        case .error:
-            iconView.image = TormyUIKit.safeImage("icon_circle_exclamation")
+        if status == .warning {
+            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
+            iconView.tintColor = TormyColors.warning
         }
         
         addSubview(iconView)
