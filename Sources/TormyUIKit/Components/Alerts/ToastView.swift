@@ -47,7 +47,8 @@ public final class ToastView: UIView {
     
     private func configureIconView(status: ToastStatus) {
         iconView.contentMode = .scaleAspectFit
-        iconView.image = UIImage(named: status.iconName, in: .module, compatibleWith: nil)
+        
+        iconView.image = UIImage(named: status.iconName, in: Bundle.module, compatibleWith: nil)
         
         if status == .warning {
             iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
@@ -61,6 +62,7 @@ public final class ToastView: UIView {
             make.centerY.equalToSuperview()
         }
     }
+
     
     private func configureLabel(message: String) {
         label.text = message
