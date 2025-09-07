@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct ThemeColorConfigure {
+public struct ColorConfigure {
     public var background: String?
     public var containerColor: String?
     public var borderColor: String?
@@ -77,7 +77,7 @@ public struct ThemeColorConfigure {
 @MainActor
 public struct TormyColors {
     
-    private static var theme: ThemeColorConfigure = ThemeColorConfigure()
+    private static var theme: ColorConfigure = ColorConfigure()
     private static let defaultColor = "#F54927"
     
     // MARK: - Cached UIColor
@@ -117,7 +117,7 @@ public struct TormyColors {
     private init() {}
     
     // MARK: - Configure
-    static func configure(theme: ThemeColorConfigure) {
+    static func configure(theme: ColorConfigure) {
         self.theme = theme
         
         // Base

@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Theme Configs
 
-public struct ThemeFontConfigure {
+public struct FontConfigure {
     public var fontNames: [TormyFonts.FontType: String]
     
     public init(bold: String, semiBold: String, medium: String, regular: String) {
@@ -22,7 +22,7 @@ public struct ThemeFontConfigure {
     }
 }
 
-public struct ThemeFontSizeConfigure {
+public struct FontSizeConfigure {
     public var fontSizes: [TormyFonts.FontSize: CGFloat]
     
     public init(h1: CGFloat, h2: CGFloat, h3: CGFloat, h4: CGFloat, h5: CGFloat,
@@ -42,33 +42,32 @@ public struct TormyFonts {
     public enum FontType { case bold, semiBold, medium, regular }
     public enum FontSize { case h1, h2, h3, h4, h5, xLarge, large, medium, small, xSmall }
 
-    private static var themeFont: ThemeFontConfigure = ThemeFontConfigure(bold: "System-Bold",
+    private static var themeFont: FontConfigure = FontConfigure(bold: "System-Bold",
                                                                           semiBold: "System-Semibold",
                                                                           medium: "System-Medium",
                                                                           regular: "System-Regular")
     
-    private static var themeFontSize: ThemeFontSizeConfigure = ThemeFontSizeConfigure(
+    private static var themeFontSize: FontSizeConfigure = FontSizeConfigure(
         h1: 34, h2: 28, h3: 24, h4: 20, h5: 18,
         xLarge: 32, large: 24, medium: 16, small: 14, xSmall: 12
     )
     
-    // Cache dictionary
     private static var fontCache: [String: UIFont] = [:]
     
     private init() {}
     
     // MARK: - Configure
     
-    public static func configure(themeFont: ThemeFontConfigure? = nil,
-                                 themeFontSize: ThemeFontSizeConfigure? = nil) {
+    static func configure(themeFont: FontConfigure? = nil,
+                                 themeFontSize: FontSizeConfigure? = nil) {
         if let font = themeFont { self.themeFont = font }
         if let size = themeFontSize { self.themeFontSize = size }
-        fontCache.removeAll() // Reset cache
+        fontCache.removeAll()
     }
     
     // MARK: - Font Access
     
-    public static func font(type: FontType, size: FontSize) -> UIFont {
+    static func font(type: FontType, size: FontSize) -> UIFont {
         let key = "\(type)-\(size)"
         if let cached = fontCache[key] { return cached }
         
@@ -79,7 +78,6 @@ public struct TormyFonts {
         fontCache[key] = uiFont
         return uiFont
     }
-    
     
     // H1
     static var h1_bold: UIFont { font(type: .bold, size: .h1) }

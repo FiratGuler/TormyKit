@@ -13,12 +13,16 @@ public final class ConfigureManager {
     
     private init() {}
     
-    public func applyColors(_ theme: ThemeColorConfigure) {
+    public func applyColors(_ theme: ColorConfigure) {
         TormyColors.configure(theme: theme)
     }
     
-    public func applyFont(themeFont: ThemeFontConfigure, themeFontSize: ThemeFontSizeConfigure) {
+    public func applyFont(themeFont: FontConfigure, themeFontSize: FontSizeConfigure) {
         TormyFonts.configure(themeFont: themeFont, themeFontSize: themeFontSize)
+    }
+    
+    public func applyLayout(_ layout: LayoutConfigure) {
+        TormyLayout.configure(layout)
     }
 
 }
