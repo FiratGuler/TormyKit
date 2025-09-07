@@ -8,9 +8,9 @@
 import UIKit
 
 @MainActor
-final class TormyUIKit {
+final class TormyUIKitCore {
     
-    static let shared = TormyUIKit()
+    static let shared = TormyUIKitCore()
     
     private init() {}
     
