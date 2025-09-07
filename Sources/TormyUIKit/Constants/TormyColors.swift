@@ -8,40 +8,40 @@
 import UIKit
 
 public struct ThemeColorConfigure {
-    var background: String?
-    var containerColor: String?
-    var borderColor: String?
-    var textFieldColor: String?
+    public var background: String?
+    public var containerColor: String?
+    public var borderColor: String?
+    public var textFieldColor: String?
     
-    var primary900: String?
-    var primary800: String?
-    var primary700: String?
-    var primary600: String?
-    var primary500: String?
-    var primary400: String?
-    var primary300: String?
-    var primary200: String?
-    var primary100: String?
-    var primary50: String?
+    public var primary900: String?
+    public var primary800: String?
+    public var primary700: String?
+    public var primary600: String?
+    public var primary500: String?
+    public var primary400: String?
+    public var primary300: String?
+    public var primary200: String?
+    public var primary100: String?
+    public var primary50: String?
     
-    var greyScale900: String?
-    var greyScale800: String?
-    var greyScale700: String?
-    var greyScale600: String?
-    var greyScale500: String?
-    var greyScale400: String?
-    var greyScale300: String?
-    var greyScale200: String?
-    var greyScale100: String?
-    var greyScale50: String?
+    public var greyScale900: String?
+    public var greyScale800: String?
+    public var greyScale700: String?
+    public var greyScale600: String?
+    public var greyScale500: String?
+    public var greyScale400: String?
+    public var greyScale300: String?
+    public var greyScale200: String?
+    public var greyScale100: String?
+    public var greyScale50: String?
     
-    var black: String?
-    var white: String?
+    public var black: String?
+    public var white: String?
     
-    var error: String?
-    var success: String?
+    public var error: String?
+    public var success: String?
     
-    init(background: String? = nil, containerColor: String? = nil, borderColor: String? = nil, textFieldColor: String? = nil, primary900: String? = nil, primary800: String? = nil, primary700: String? = nil, primary600: String? = nil, primary500: String? = nil, primary400: String? = nil, primary300: String? = nil, primary200: String? = nil, primary100: String? = nil, primary50: String? = nil, greyScale900: String? = nil, greyScale800: String? = nil, greyScale700: String? = nil, greyScale600: String? = nil, greyScale500: String? = nil, greyScale400: String? = nil, greyScale300: String? = nil, greyScale200: String? = nil, greyScale100: String? = nil, greyScale50: String? = nil, black: String? = nil, white: String? = nil, error: String? = nil, success: String? = nil) {
+    public init(background: String? = nil, containerColor: String? = nil, borderColor: String? = nil, textFieldColor: String? = nil, primary900: String? = nil, primary800: String? = nil, primary700: String? = nil, primary600: String? = nil, primary500: String? = nil, primary400: String? = nil, primary300: String? = nil, primary200: String? = nil, primary100: String? = nil, primary50: String? = nil, greyScale900: String? = nil, greyScale800: String? = nil, greyScale700: String? = nil, greyScale600: String? = nil, greyScale500: String? = nil, greyScale400: String? = nil, greyScale300: String? = nil, greyScale200: String? = nil, greyScale100: String? = nil, greyScale50: String? = nil, black: String? = nil, white: String? = nil, error: String? = nil, success: String? = nil) {
         self.background = background
         self.containerColor = containerColor
         self.borderColor = borderColor
@@ -76,10 +76,10 @@ public struct ThemeColorConfigure {
 
 @MainActor
 public struct TormyColors {
-
+    
     private static var theme: ThemeColorConfigure = ThemeColorConfigure()
     private static let defaultColor = "#F54927"
-
+    
     // MARK: - Cached UIColor
     private static var _background: UIColor = UIColor(hex: defaultColor)
     private static var _containerColor: UIColor = UIColor(hex: defaultColor)
@@ -113,13 +113,13 @@ public struct TormyColors {
     
     private static var _error: UIColor = UIColor(hex: defaultColor)
     private static var _success: UIColor = UIColor(hex: defaultColor)
-
+    
     private init() {}
-
+    
     // MARK: - Configure
     static func configure(theme: ThemeColorConfigure) {
         self.theme = theme
-
+        
         // Base
         _background = UIColor(hex: theme.background ?? defaultColor)
         _containerColor = UIColor(hex: theme.containerColor ?? defaultColor)
@@ -158,7 +158,7 @@ public struct TormyColors {
         _error = UIColor(hex: theme.error ?? defaultColor)
         _success = UIColor(hex: theme.success ?? defaultColor)
     }
-
+    
     
     public static var background: UIColor { _background }
     public static var containerColor: UIColor { _containerColor }
