@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-public class TormyBaseController: UIViewController {
+open class TormyBaseController: UIViewController {
 
     public func showToast(message: String, status: ToastView.ToastStatus, duration: TimeInterval = 2.3) {
         let toastView = ToastView(message: message, status: status)
