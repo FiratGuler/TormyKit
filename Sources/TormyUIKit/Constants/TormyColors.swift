@@ -8,7 +8,7 @@
 import UIKit
 
 public struct ColorConfigure {
-    public var background: String?
+    public var backgroundColor: String?
     public var containerColor: String?
     public var borderColor: String?
     public var textFieldColor: String?
@@ -43,7 +43,7 @@ public struct ColorConfigure {
     public var warning: String?
     
     public init(background: String? = nil, containerColor: String? = nil, borderColor: String? = nil, textFieldColor: String? = nil, primary900: String? = nil, primary800: String? = nil, primary700: String? = nil, primary600: String? = nil, primary500: String? = nil, primary400: String? = nil, primary300: String? = nil, primary200: String? = nil, primary100: String? = nil, primary50: String? = nil, greyScale900: String? = nil, greyScale800: String? = nil, greyScale700: String? = nil, greyScale600: String? = nil, greyScale500: String? = nil, greyScale400: String? = nil, greyScale300: String? = nil, greyScale200: String? = nil, greyScale100: String? = nil, greyScale50: String? = nil, black: String? = nil, white: String? = nil, error: String? = nil, success: String? = nil, warning: String? = nil) {
-        self.background = background
+        self.backgroundColor = background
         self.containerColor = containerColor
         self.borderColor = borderColor
         self.textFieldColor = textFieldColor
@@ -80,10 +80,10 @@ public struct ColorConfigure {
 public struct TormyColors {
     
     private static var theme: ColorConfigure = ColorConfigure()
-    private static let defaultColor = "#F54927"
+    private static let defaultColor = "#0ef078"
     
     // MARK: - Cached UIColor
-    private static var _background: UIColor = UIColor(hex: defaultColor)
+    private static var _backgroundColor: UIColor = UIColor(hex: defaultColor)
     private static var _containerColor: UIColor = UIColor(hex: defaultColor)
     private static var _borderColor: UIColor = UIColor(hex: defaultColor)
     private static var _textFieldColor: UIColor = UIColor(hex: defaultColor)
@@ -124,7 +124,7 @@ public struct TormyColors {
         self.theme = theme
         
         // Base
-        _background = UIColor(hex: theme.background ?? defaultColor)
+        _backgroundColor = UIColor(hex: theme.backgroundColor ?? defaultColor)
         _containerColor = UIColor(hex: theme.containerColor ?? defaultColor)
         _borderColor = UIColor(hex: theme.borderColor ?? defaultColor)
         _textFieldColor = UIColor(hex: theme.textFieldColor ?? defaultColor)
@@ -160,11 +160,11 @@ public struct TormyColors {
         // Status
         _error = UIColor(hex: theme.error ?? defaultColor)
         _success = UIColor(hex: theme.success ?? defaultColor)
-        _warning = UIColor(hex: theme.success ?? defaultColor)
+        _warning = UIColor(hex: theme.warning ?? defaultColor)
     }
     
     
-    public static var background: UIColor { _background }
+    public static var backgroundColor: UIColor { _backgroundColor }
     public static var containerColor: UIColor { _containerColor }
     public static var borderColor: UIColor { _borderColor }
     public static var textFieldColor: UIColor { _textFieldColor }

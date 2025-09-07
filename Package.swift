@@ -23,7 +23,7 @@ let package = Package(
             name: "TormyUIKit",
             dependencies: ["SnapKit"],
             resources: [
-                .process("Resources") // Resource klasörü burada işlenecek
+                .process("Resources/Icons.xcassets")
             ]
         )
     ]

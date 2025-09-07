@@ -8,8 +8,17 @@
 import UIKit
 import SnapKit
 
-open class TormyBaseController: UIViewController {
+open class TormyBaseViewController: UIViewController {
+    
+    open var appBackground: UIColor {
+        return TormyColors.backgroundColor
+    }
 
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = appBackground 
+    }
+    
     public func showToast(message: String, status: ToastView.ToastStatus, duration: TimeInterval = 2.3) {
         let toastView = ToastView(message: message, status: status)
 
@@ -26,8 +35,5 @@ open class TormyBaseController: UIViewController {
         }
     }
     
-    
-    
-    
-    
+
 }
