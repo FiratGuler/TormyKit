@@ -16,9 +16,9 @@ public final class ToastView: UIView {
         
         var iconName: String {
             switch self {
-            case .success: return "icon_success"
-            case .warning: return "icon_warning"
-            case .error: return "icon_error"
+            case .success: return "icon_circle_check"
+            case .warning: return "icon_circle_exclamation"
+            case .error: return "icon_circle_exclamation"
             }
         }
     }
