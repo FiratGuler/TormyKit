@@ -11,7 +11,7 @@ import SnapKit
 open class TormyBaseViewController: UIViewController {
     
     open var appBackground: UIColor {
-        return TormyColors.backgroundColor
+        return TormyColors.neutral900
     }
 
     override open func viewDidLoad() {
@@ -35,5 +35,50 @@ open class TormyBaseViewController: UIViewController {
         }
     }
     
+    public func showPopUp(title: String,
+                              message: String,
+                              positiveButton: String,
+                              positiveAction: (() -> Void)? = nil,
+                              negativeButton: String? = nil,
+                              negativeAction: (() -> Void)? = nil) {
+
+            let popup = PopUpView(title: title,
+                                  message: message,
+                                  positiveButton: positiveButton,
+                                  positiveAction: positiveAction,
+                                  negativeButton: negativeButton,
+                                  negativeAction: negativeAction)
+
+            let popupVC = PopUpViewController(popup: popup)
+            present(popupVC, animated: true)
+        }
+//    
+//    public func showPopUp(title: String, message: String, positiveButton: String, positiveAction: (() -> Void)? = nil) {
+//
+//
+//        
+//                let backgroundView = UIView()
+//        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+//        backgroundView.alpha = 0.0
+//        view.addSubview(backgroundView)
+//        backgroundView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
+//        
+//        let popUp = PopUpView(title: title, message: message, positiveButton: positiveButton, positiveAction: positiveAction)
+//        
+//        view.addSubview(popUp)
+//        popUp.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.left.right.equalToSuperview().inset(TormyLayout.margin3x)
+//            make.height.equalToSuperview().dividedBy(3)
+//        }
+//        
+//        UIView.animate(withDuration: 0.25) {
+//            backgroundView.alpha = 1.0
+//        }
+//
+//    }
+//    
 
 }

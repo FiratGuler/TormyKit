@@ -34,9 +34,7 @@ public final class ToastView: UIView {
     required init?(coder: NSCoder) { fatalError() }
     
     private func setupUI(message: String, status: ToastStatus) {
-        backgroundColor = UIColor.white.withAlphaComponent(0.8)
-        layer.borderWidth = 1
-        layer.borderColor = TormyColors.borderColor.cgColor
+        backgroundColor = TormyColors.neutral300
         layer.cornerRadius = TormyLayout.cornerRadius
         addShadow(y: 2.0, blurRadius: 2.0)
         

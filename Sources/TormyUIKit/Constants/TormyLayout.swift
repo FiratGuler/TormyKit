@@ -8,6 +8,7 @@
 import UIKit
 
 public struct LayoutConfigure {
+    public var buttonHeight: CGFloat
     public var cornerRadius: CGFloat
     public var margin: CGFloat
     public var margin2x: CGFloat
@@ -19,6 +20,7 @@ public struct LayoutConfigure {
     
     
     public init(
+        buttonHeight: CGFloat = 44,
         cornerRadius: CGFloat = 8,
         margin: CGFloat = 8,
         margin2x: CGFloat = 16,
@@ -28,6 +30,7 @@ public struct LayoutConfigure {
         toastAlertHeight: CGFloat = 60,
         toastAlertTopPadding: CGFloat = 16
     ) {
+        self.buttonHeight = buttonHeight
         self.cornerRadius = cornerRadius
         self.margin = margin
         self.margin2x = margin2x
@@ -40,7 +43,7 @@ public struct LayoutConfigure {
 }
 
 @MainActor
-struct TormyLayout {
+public struct TormyLayout {
     
     private static var theme: LayoutConfigure = LayoutConfigure()
     
@@ -51,6 +54,7 @@ struct TormyLayout {
     }
     
     // MARK: - Accessors
+    public static var buttonHeight: CGFloat { theme.buttonHeight }
     public static var cornerRadius: CGFloat { theme.cornerRadius }
     public static var margin: CGFloat { theme.margin }
     public static var margin2x: CGFloat { theme.margin2x }

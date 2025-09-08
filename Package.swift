@@ -9,7 +9,6 @@ let package = Package(
         .iOS(.v13)
     ],
     products: [
-        // UIKit için kütüphane
         .library(
             name: "TormyUIKit",
             targets: ["TormyUIKit"]
