@@ -14,8 +14,6 @@ public final class TormyUIKitCore {
     
     private init() {}
     
-    var bundle: Bundle = .main
-    
     // MARK: - Logs
     public static func log(_ message: String,
                            file: String = #file,
@@ -50,8 +48,8 @@ public final class TormyUIKitCore {
     
     // MARK: - Localized
     
-    public func localized(_ key: String) -> String {
-        return NSLocalizedString(key, bundle: bundle, comment: "")
+    public static func localized(_ key: String) -> String {
+        return NSLocalizedString(key, bundle: .main, comment: "")
     }
 
     
