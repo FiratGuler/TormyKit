@@ -42,10 +42,10 @@ public struct TormyFonts {
     public enum FontType { case bold, semiBold, medium, regular }
     public enum FontSize { case h1, h2, h3, h4, h5, xLarge, large, medium, small, xSmall }
 
-    private static var themeFont: FontConfigure = FontConfigure(bold: "System-Bold",
-                                                                          semiBold: "System-Semibold",
-                                                                          medium: "System-Medium",
-                                                                          regular: "System-Regular")
+    private static var themeFont: FontConfigure = FontConfigure(bold: "HelveticaNeue-Bold",
+                                                                semiBold: "HelveticaNeue-Medium",
+                                                                medium: "HelveticaNeue",
+                                                                regular: "HelveticaNeue-Light")
     
     private static var themeFontSize: FontSizeConfigure = FontSizeConfigure(
         h1: 34, h2: 28, h3: 24, h4: 20, h5: 18,
@@ -63,10 +63,29 @@ public struct TormyFonts {
         if let font = themeFont { self.themeFont = font }
         if let size = themeFontSize { self.themeFontSize = size }
         fontCache.removeAll()
+        validateFonts()
+    }
+    
+    // MARK: - Validate
+    private static func validateFonts() {
+        var missingFonts: [String] = []
+        
+        for (type, fontName) in themeFont.fontNames {
+            if UIFont(name: fontName, size: 12) == nil {
+                missingFonts.append("'\(fontName)' (\(type))")
+            }
+        }
+        
+        if missingFonts.isEmpty {
+            TormyUIKitCore.successLog("Tüm fontlar başarıyla tanımlandı")
+        } else {
+            for missing in missingFonts {
+                TormyUIKitCore.errorLog("Tanımlanan font bulunamadı: \(missing)")
+            }
+        }
     }
     
     // MARK: - Font Access
-    
     static func font(type: FontType, size: FontSize) -> UIFont {
         let key = "\(type)-\(size)"
         if let cached = fontCache[key] { return cached }

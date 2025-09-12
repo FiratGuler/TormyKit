@@ -16,7 +16,7 @@ public final class TormyUIKitCore {
     
     var bundle: Bundle = .main
     
-    // MARK: - Log
+    // MARK: - Logs
     public static func log(_ message: String,
                            file: String = #file,
                            function: String = #function,
@@ -26,6 +26,27 @@ public final class TormyUIKitCore {
         print("🐞 [\(fileName):\(line)] func: \(function) \n\(message) ")
 #endif
     }
+    
+    public static func errorLog(_ message: String,
+                                file: String = #file,
+                                function: String = #function,
+                                line: Int = #line) {
+#if DEBUG
+        let fileName = (file as NSString).lastPathComponent
+        print("🆘‼️🆘 [\(fileName):\(line)] func: \(function) \n\(message)")
+#endif
+    }
+    
+    public static func successLog(_ message: String,
+                                file: String = #file,
+                                function: String = #function,
+                                line: Int = #line) {
+#if DEBUG
+        let fileName = (file as NSString).lastPathComponent
+        print("✅✅✅ [\(fileName):\(line)] func: \(function) \n\(message)")
+#endif
+    }
+    
     
     // MARK: - Localized
     
