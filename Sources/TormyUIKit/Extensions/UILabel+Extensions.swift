@@ -9,10 +9,10 @@ import UIKit
 
 public extension UILabel {
     
-    func setTormy(text: String, font: TormyFonts, color: TormyColors, aligment: NSTextAlignment) {
-        self.text = text
-        self.font = font
-        self.textColor = color
-        self.textAlignment = aligment
-    }
+//    func setTormy(text: String, font: TormyFonts, color: TormyColors, aligment: NSTextAlignment) {
+//        self.text = text
+//        self.font = font
+//        self.textColor = color
+//        self.textAlignment = aligment
+//    }
 }
