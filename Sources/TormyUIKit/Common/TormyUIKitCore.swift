@@ -21,7 +21,7 @@ public final class TormyUIKitCore {
                            line: Int = #line) {
 #if DEBUG
         let fileName = (file as NSString).lastPathComponent
-        print("🐞 [\(fileName):\(line)] func: \(function) \n\(message) ")
+        print("🐞🐞🐞 TORMYKIT  [\(fileName):\(line)] func: \(function) \n\(message) ")
 #endif
     }
     
@@ -31,7 +31,7 @@ public final class TormyUIKitCore {
                                 line: Int = #line) {
 #if DEBUG
         let fileName = (file as NSString).lastPathComponent
-        print("🆘‼️🆘 [\(fileName):\(line)] func: \(function) \n\(message)")
+        print("🆘‼️🆘 TORMYKIT [\(fileName):\(line)] func: \(function) \n\(message)")
 #endif
     }
     
@@ -41,7 +41,7 @@ public final class TormyUIKitCore {
                                 line: Int = #line) {
 #if DEBUG
         let fileName = (file as NSString).lastPathComponent
-        print("✅✅✅ [\(fileName):\(line)] func: \(function) \n\(message)")
+        print("✅✅✅ TORMYKIT [\(fileName):\(line)] func: \(function) \n\(message)")
 #endif
     }
     
@@ -67,4 +67,5 @@ public final class TormyUIKitCore {
         return UIImage(named: name) ?? UIImage()
         #endif
     }
+}
 
