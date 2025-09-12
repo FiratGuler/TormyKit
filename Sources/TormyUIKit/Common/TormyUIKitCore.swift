@@ -55,17 +55,20 @@ public final class TormyUIKitCore {
     
     // MARK: - Image
     
-    public static func safeImage(_ name: String) -> UIImage {
-        #if DEBUG
-        if let image = UIImage(named: name) {
+    public static func safeImage(_ name: String,
+                                 file: String = #file,
+                                 function: String = #function,
+                                 line: Int = #line) -> UIImage {
+    #if DEBUG
+        if let image = UIImage(named: name) ?? UIImage(systemName: "applelogo") {
             return image
         } else {
-            errorLog("Görsel Bulunamadı: \(name)")
-            return UIImage(systemName: "applelogo") ?? UIImage()
+            errorLog("Görsel Bulunamadı: \(name)", file: file, function: function, line: line)
+            return UIImage()
         }
-        #else
+    #else
         return UIImage(named: name) ?? UIImage()
-        #endif
+    #endif
     }
 }
 
