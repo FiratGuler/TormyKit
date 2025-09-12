@@ -12,8 +12,10 @@ import UIKit
 public struct FontConfigure {
     public var fontNames: [TormyFonts.FontType: String]
     
-    public init(bold: String, semiBold: String, medium: String, regular: String) {
+    public init(black: String ,extraBold: String ,bold: String, semiBold: String, medium: String, regular: String) {
         self.fontNames = [
+            .black: black,
+            .extraBold: extraBold,
             .bold: bold,
             .semiBold: semiBold,
             .medium: medium,
@@ -39,10 +41,12 @@ public struct FontSizeConfigure {
 @MainActor
 public struct TormyFonts {
     
-    public enum FontType { case bold, semiBold, medium, regular }
+    public enum FontType { case black, extraBold, bold, semiBold, medium, regular }
     public enum FontSize { case h1, h2, h3, h4, h5, xLarge, large, medium, small, xSmall }
 
-    private static var themeFont: FontConfigure = FontConfigure(bold: "HelveticaNeue-Bold",
+    private static var themeFont: FontConfigure = FontConfigure(black: "HelveticaNeue-Black",
+                                                                extraBold: "HelveticaNeue-ExtraBold",
+                                                                bold: "HelveticaNeue-Bold",
                                                                 semiBold: "HelveticaNeue-Medium",
                                                                 medium: "HelveticaNeue",
                                                                 regular: "HelveticaNeue-Light")
