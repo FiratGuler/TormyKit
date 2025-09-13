@@ -81,11 +81,11 @@ public struct TormyFonts {
         }
         
         if missingFonts.isEmpty {
-            TormyUIKitCore.log("Tüm fontlar başarıyla tanımlandı", type: .success)
+            TCore.log("Tüm fontlar başarıyla tanımlandı", type: .success)
 
         } else {
             for missing in missingFonts {
-                TormyUIKitCore.log("Tanımlanan font bulunamadı: \(missing)", type: .error)
+                TCore.log("Tanımlanan font bulunamadı: \(missing)", type: .error)
                 
             }
         }

@@ -7,17 +7,15 @@
 
 import UIKit
 
-@MainActor
-public final class TormyUIKitCore {
-    
-    static let shared = TormyUIKitCore()
+
+public final class TCore {
     
     private init() {}
     
     // MARK: - Logs
 
     public enum LogType { case debug, error, success }
-    
+    // mesaj string olmasın sen içerde çeivir
     public static func log(_ message: String,
                            type: LogType = .debug,
                            file: String = #file,
@@ -63,7 +61,7 @@ public final class TormyUIKitCore {
         
 #if DEBUG
         if localized == key {
-            TormyUIKitCore.log("Local key bulunamadı: \(key)", type: .error, file: file, function: function, line: line ,showMeta: true)
+            TCore.log("Local key bulunamadı: \(key)", type: .error, file: file, function: function, line: line ,showMeta: true)
         }
 #endif
         return localized
@@ -81,7 +79,7 @@ public final class TormyUIKitCore {
             return image
         } else {
             UIImage(systemName: "applelogo")
-            TormyUIKitCore.log("Görsel Bulunamadı: \(name)", type: .error, file: file, function: function, line: line ,showMeta: true)
+            TCore.log("Görsel Bulunamadı: \(name)", type: .error, file: file, function: function, line: line ,showMeta: true)
             return UIImage()
         }
     #else
