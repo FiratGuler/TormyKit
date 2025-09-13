@@ -40,7 +40,7 @@ public struct FontSizeConfigure {
 
 @MainActor
 public struct TormyFonts {
-    
+    let font: UIFont
     public enum FontType { case black, extraBold, bold, semiBold, medium, regular }
     public enum FontSize { case h1, h2, h3, h4, h5, xLarge, large, medium, small, xSmall }
 
@@ -81,10 +81,12 @@ public struct TormyFonts {
         }
         
         if missingFonts.isEmpty {
-            TormyUIKitCore.successLog("Tüm fontlar başarıyla tanımlandı")
+            TormyUIKitCore.log("Tüm fontlar başarıyla tanımlandı", type: .success)
+
         } else {
             for missing in missingFonts {
-                TormyUIKitCore.errorLog("Tanımlanan font bulunamadı: \(missing)")
+                TormyUIKitCore.log("Tanımlanan font bulunamadı: \(missing)", type: .error)
+                
             }
         }
     }

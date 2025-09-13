@@ -15,41 +15,58 @@ public final class TormyUIKitCore {
     private init() {}
     
     // MARK: - Logs
+
+    public enum LogType { case debug, error, success }
+    
     public static func log(_ message: String,
+                           type: LogType = .debug,
                            file: String = #file,
                            function: String = #function,
-                           line: Int = #line) {
-#if DEBUG
+                           line: Int = #line,
+                           showMeta: Bool = false) {
+    #if DEBUG
         let fileName = (file as NSString).lastPathComponent
-        print("🐞🐞🐞 TORMYKIT  [\(fileName):\(line)] func: \(function) \n\(message) ")
-#endif
+        
+        let emoji: String = {
+            switch type {
+            case .debug: return "🐞🐞🐞"
+            case .error: return "🆘‼️🆘"
+            case .success: return "✅✅✅"
+            }
+        }()
+        
+        if showMeta {
+            print("""
+            \(emoji) TORMYKIT ─────────────────────────────
+            ├─ File: \(fileName):\(line)
+            ├─ Func: \(function)
+            ├─ Message: \(message)
+            └─────────────────────────────────────────────
+            """)
+        } else {
+            print("""
+            \(emoji) TORMYKIT ─────────────────────────────
+            ├─ \(message)
+            └─────────────────────────────────────────────
+            """)
+        }
+    #endif
     }
-    
-    public static func errorLog(_ message: String,
-                                file: String = #file,
-                                function: String = #function,
-                                line: Int = #line) {
-#if DEBUG
-        let fileName = (file as NSString).lastPathComponent
-        print("🆘‼️🆘 TORMYKIT [\(fileName):\(line)] func: \(function) \n\(message)")
-#endif
-    }
-    
-    public static func successLog(_ message: String,
-                                file: String = #file,
-                                function: String = #function,
-                                line: Int = #line) {
-#if DEBUG
-        let fileName = (file as NSString).lastPathComponent
-        print("✅✅✅ TORMYKIT [\(fileName):\(line)] func: \(function) \n\(message)")
-#endif
-    }
-    
     
     // MARK: - Localized
-    
-    public static func localized(_ key: String) -> String {
-        return NSLocalizedString(key, bundle: .main, comment: "")
+
+    public static func localized(_ key: String,
+                                 file: String = #file,
+                                 function: String = #function,
+                                 line: Int = #line) -> String {
+        let localized = NSLocalizedString(key, bundle: .main, comment: "")
+        
+#if DEBUG
+        if localized == key {
+            TormyUIKitCore.log("Local key bulunamadı: \(key)", type: .error, file: file, function: function, line: line ,showMeta: true)
+        }
+#endif
+        return localized
     }
 
     
@@ -60,10 +77,11 @@ public final class TormyUIKitCore {
                                  function: String = #function,
                                  line: Int = #line) -> UIImage {
     #if DEBUG
-        if let image = UIImage(named: name) ?? UIImage(systemName: "applelogo") {
+        if let image = UIImage(named: name) {
             return image
         } else {
-            errorLog("Görsel Bulunamadı: \(name)", file: file, function: function, line: line)
+            UIImage(systemName: "applelogo")
+            TormyUIKitCore.log("Görsel Bulunamadı: \(name)", type: .error, file: file, function: function, line: line ,showMeta: true)
             return UIImage()
         }
     #else
