@@ -14,7 +14,16 @@ public final class TCore {
     
     // MARK: - Logs
 
-    public enum LogType { case debug, error, success }
+    public enum LogType { case debug, error, success, config
+        var emoji: String {
+            switch self {
+            case .debug:  "🐞🐞🐞"
+            case .error: "🆘‼️🆘"
+            case .success: "✅✅✅"
+            case .config : "⚙️⚙️⚙️"
+            }
+        }
+}
     // mesaj string olmasın sen içerde çeivir
     public static func log(_ message: String,
                            type: LogType = .debug,
@@ -24,30 +33,40 @@ public final class TCore {
                            showMeta: Bool = false) {
     #if DEBUG
         let fileName = (file as NSString).lastPathComponent
-        
-        let emoji: String = {
-            switch type {
-            case .debug: return "🐞🐞🐞"
-            case .error: return "🆘‼️🆘"
-            case .success: return "✅✅✅"
+        switch type {
+        case .debug, .error, .success:
+            if showMeta {
+                print("""
+                \(type.emoji) TORMYKIT ─────────────────────────────
+                ├─ File: \(fileName):\(line)
+                ├─ Func: \(function)
+                ├─ Message: \(message)
+                └─────────────────────────────────────────────
+                """)
+            } else {
+                print("""
+                \(type.emoji) TORMYKIT ─────────────────────────────
+                ├─ \(message)
+                └─────────────────────────────────────────────
+                """)
             }
-        }()
-        
-        if showMeta {
-            print("""
-            \(emoji) TORMYKIT ─────────────────────────────
-            ├─ File: \(fileName):\(line)
-            ├─ Func: \(function)
-            ├─ Message: \(message)
-            └─────────────────────────────────────────────
-            """)
-        } else {
-            print("""
-            \(emoji) TORMYKIT ─────────────────────────────
-            ├─ \(message)
-            └─────────────────────────────────────────────
-            """)
+        case .config:
+            if showMeta {
+                print("""
+                \(type.emoji) TORMYKIT ─────────────────────────────
+                ├─ File: \(fileName):\(line)
+                ├─ Func: \(function)
+                ├─ Message: \(message)
+                └─────────────────────────────────────────────
+                """)
+            } else {
+                print("""
+                \(type.emoji) TORMYKIT ├─ \(message)
+                """)
+            }
         }
+        
+
     #endif
     }
     

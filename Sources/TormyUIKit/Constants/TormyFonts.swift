@@ -81,7 +81,7 @@ public struct TormyFonts {
         }
         
         if missingFonts.isEmpty {
-            TCore.log("Tüm fontlar başarıyla tanımlandı", type: .success)
+            TCore.log("Tüm fontlar başarıyla tanımlandı", type: .config)
 
         } else {
             for missing in missingFonts {
