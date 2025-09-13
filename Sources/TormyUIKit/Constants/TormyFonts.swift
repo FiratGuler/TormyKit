@@ -40,7 +40,7 @@ public struct FontSizeConfigure {
 
 @MainActor
 public struct TormyFonts {
-    let font: UIFont
+    
     public enum FontType { case black, extraBold, bold, semiBold, medium, regular }
     public enum FontSize { case h1, h2, h3, h4, h5, xLarge, large, medium, small, xSmall }
 
