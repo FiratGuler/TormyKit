@@ -32,6 +32,17 @@ open class TormyBaseViewController: UIViewController {
         navigationItem.title = navigationTitleText
     }
     
+    // MARK: - Keybord Dismiss
+    public func addTapGestureToDismissKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     // MARK: - Alert
     // MARK: Toast
     public func showToast(message: String, status: ToastView.ToastStatus, duration: TimeInterval = 2.3) {
