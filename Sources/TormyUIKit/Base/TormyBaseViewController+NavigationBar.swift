@@ -14,13 +14,13 @@ extension TormyBaseViewController {
         case right
     }
 
-    // Navigation title koxsnfigürasyonu
     open var navigationTitleText: String { "" }
     open var navigationTitleColor: UIColor { TormyColors.primary900 }
     open var navigationTitleFont: UIFont { TormyFonts.h4_bold }
     open var hideBackButtonText: Bool { false }
     
     
+    // MARK: - Configure Navigation Title
     func configureNavigationTitle() {
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: navigationTitleColor,
@@ -30,6 +30,7 @@ extension TormyBaseViewController {
         navigationItem.title = navigationTitleText
     }
     
+    // MARK: - Back Button Text Visibility
     func applyBackButtonTextVisibility() {
         if hideBackButtonText {
             let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -37,8 +38,8 @@ extension TormyBaseViewController {
         }
     }
     
-    
-    func setBarButton(side: BarButtonSide, image: UIImage, tintColor: UIColor = .systemBlue, target: Any?, action: Selector?) {
+    // MARK: - Set Bar Button
+    public func setBarButton(side: BarButtonSide, image: UIImage, tintColor: UIColor = .systemBlue, target: Any?, action: Selector?) {
            let button = UIButton(type: .system)
            button.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
            button.tintColor = tintColor
