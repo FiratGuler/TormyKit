@@ -18,9 +18,9 @@ public struct NavigationBarStyle {
     public var tintColor: UIColor?
     public var titleFont: UIFont?
     public var largeTitleFont: UIFont?
-    public var hideBackButtonText: Bool = false
+    public var hideBackButtonText: Bool?
     
-    init(backgroundColor: UIColor? = nil, titleColor: UIColor? = nil, largeTitleColor: UIColor? = nil, tintColor: UIColor? = nil, titleFont: UIFont? = nil, largeTitleFont: UIFont? = nil, hideBackButtonText: Bool) {
+    public init(backgroundColor: UIColor? = nil, titleColor: UIColor? = nil, largeTitleColor: UIColor? = nil, tintColor: UIColor? = nil, titleFont: UIFont? = nil, largeTitleFont: UIFont? = nil, hideBackButtonText: Bool? = false ) {
         self.backgroundColor = backgroundColor
         self.titleColor = titleColor
         self.largeTitleColor = largeTitleColor
