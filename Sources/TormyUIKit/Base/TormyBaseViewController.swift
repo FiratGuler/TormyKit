@@ -11,7 +11,12 @@ import SnapKit
 open class TormyBaseViewController: UIViewController {
     
     open var appBackground: UIColor { TormyColors.neutral900 }
-
+    
+    // MARK: - NavigationBar
+    open var navigationTitleText: String { "" }
+    open var navigationTitleColor: UIColor { TormyColors.primary900 }
+    open var navigationTitleFont: UIFont { TormyFonts.h4_bold }
+    open var hideBackButtonText: Bool { false }
     
     override open func viewDidLoad() {
         super.viewDidLoad()

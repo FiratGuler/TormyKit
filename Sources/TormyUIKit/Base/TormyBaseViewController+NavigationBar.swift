@@ -12,13 +12,7 @@ extension TormyBaseViewController {
     public enum BarButtonSide {
         case left
         case right
-    }
-
-    open var navigationTitleText: String { "" }
-    open var navigationTitleColor: UIColor { TormyColors.primary900 }
-    open var navigationTitleFont: UIFont { TormyFonts.h4_bold }
-    open var hideBackButtonText: Bool { false }
-    
+    }    
     
     // MARK: - Configure Navigation Title
     func configureNavigationTitle() {

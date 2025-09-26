@@ -35,7 +35,7 @@ public struct NavigationBarStyle {
 public final class ConfigureManager {
     public static let shared = ConfigureManager()
     
-    public var localizableDebug: Bool { true }
+    public var isLocalizableDebugEnabled: Bool = true
     
     private init() {}
     

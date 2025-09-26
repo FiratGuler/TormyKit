@@ -78,11 +78,16 @@ public final class TCore {
                                  line: Int = #line) -> String {
         let localized = NSLocalizedString(key, bundle: .main, comment: "")
         
-#if DEBUG
+    #if DEBUG
         if localized == key {
-            TCore.log("Local key bulunamadı: \(key)", type: .error, file: file, function: function, line: line ,showMeta: true)
+            Task { @MainActor in
+                if ConfigureManager.shared.isLocalizableDebugEnabled {
+                    TCore.log("Local key bulunamadı: \(key)", type: .error, file: file, function: function, line: line, showMeta: true)
+                }
+            }
         }
-#endif
+    #endif
+
         return localized
     }
 
