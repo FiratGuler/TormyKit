@@ -11,12 +11,7 @@ import SnapKit
 open class TormyBaseViewController: UIViewController {
     
     open var appBackground: UIColor { TormyColors.neutral900 }
-    
-    // Navigation title konfigürasyonu
-    open var navigationTitleText: String { "" }
-    open var navigationTitleColor: UIColor { TormyColors.primary900 }
-    open var navigationTitleFont: UIFont { TormyFonts.h4_bold }
-    open var hideBackButtonText: Bool { false }
+
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -25,21 +20,7 @@ open class TormyBaseViewController: UIViewController {
         applyBackButtonTextVisibility()
     }
     
-    private func configureNavigationTitle() {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: navigationTitleColor,
-            .font: navigationTitleFont
-        ]
-        navigationController?.navigationBar.titleTextAttributes = attributes
-        navigationItem.title = navigationTitleText
-    }
-    
-    private func applyBackButtonTextVisibility() {
-        if hideBackButtonText {
-            let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            navigationItem.backBarButtonItem = backButton
-        }
-    }
+   
     
     // MARK: - Keybord Dismiss
     public func addTapGestureToDismissKeyboard() {
