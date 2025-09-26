@@ -15,22 +15,19 @@ public struct NavigationBarStyle {
     public var backgroundColor: UIColor?
     public var titleColor: UIColor?
     public var largeTitleColor: UIColor?
-    public var tintColor: UIColor?   
+    public var tintColor: UIColor?
     public var titleFont: UIFont?
     public var largeTitleFont: UIFont?
+    public var hideBackButtonText: Bool = false
     
-    public init(backgroundColor: UIColor? = nil,
-                titleColor: UIColor? = nil,
-                largeTitleColor: UIColor? = nil,
-                tintColor: UIColor? = nil,
-                titleFont: UIFont? = nil,
-                largeTitleFont: UIFont? = nil) {
+    init(backgroundColor: UIColor? = nil, titleColor: UIColor? = nil, largeTitleColor: UIColor? = nil, tintColor: UIColor? = nil, titleFont: UIFont? = nil, largeTitleFont: UIFont? = nil, hideBackButtonText: Bool) {
         self.backgroundColor = backgroundColor
         self.titleColor = titleColor
         self.largeTitleColor = largeTitleColor
         self.tintColor = tintColor
         self.titleFont = titleFont
         self.largeTitleFont = largeTitleFont
+        self.hideBackButtonText = hideBackButtonText
     }
 }
 
@@ -41,7 +38,7 @@ public final class ConfigureManager {
     public var localizableDebug: Bool { true }
     
     private init() {}
-        
+    
     public func applyColors(_ theme: ColorConfigure) {
         TormyColors.configure(theme: theme)
     }
@@ -89,6 +86,14 @@ public final class ConfigureManager {
         }
         appearance.largeTitleTextAttributes = largeTitleAttributes
         
+        // Back button text’i gizle
+        if style.hideBackButtonText {
+            let backButtonAppearance = UIBarButtonItemAppearance()
+            backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+            backButtonAppearance.highlighted.titleTextAttributes = [.foregroundColor: UIColor.clear]
+            appearance.backButtonAppearance = backButtonAppearance
+        }
+        
         // Apply
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
@@ -96,7 +101,9 @@ public final class ConfigureManager {
         
         // Tint
         UINavigationBar.appearance().tintColor = style.tintColor ?? .systemBlue
+        
+        
     }
-
+    
 }
 
