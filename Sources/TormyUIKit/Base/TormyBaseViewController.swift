@@ -40,7 +40,9 @@ open class TormyBaseViewController: UIViewController {
     
     // MARK: - Alert
     // MARK: Toast
-    public func showToast(message: String, status: ToastView.ToastStatus, duration: TimeInterval = 2.3) {
+    public func showToast(message: String,
+                          status: ToastView.ToastStatus,
+                          duration: TimeInterval = 2.3) {
         let toastView = ToastView(message: message, status: status)
         
         view.addSubview(toastView)
@@ -55,6 +57,32 @@ open class TormyBaseViewController: UIViewController {
             toastView.removeFromSuperview()
         }
     }
+    
+    // MARK: - Icon Toast
+    @discardableResult
+    public func showIconToast(status: ToastIconView.ToastIconStatus,
+                              size: CGFloat = 60,
+                              duration: TimeInterval = 2.3) -> ToastIconView {
+        let toast = ToastIconView(status: status, size: size)
+        toast.alpha = 0
+        toast.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        
+        view.addSubview(toast)
+        toast.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(TormyLayout.toastTopPadding)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(TormyLayout.toastHeight)
+            make.left.right.equalToSuperview().inset(TormyLayout.toastTopPadding)
+        }
+        
+        UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
+            toast.alpha = 1
+            toast.transform = .identity
+        })
+    
+        return toast
+    }
+
     
     // MARK: PopUp
     public func showPopUp(title: String,
