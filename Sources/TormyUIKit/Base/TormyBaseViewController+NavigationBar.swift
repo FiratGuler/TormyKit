@@ -49,5 +49,22 @@ extension TormyBaseViewController {
                navigationItem.rightBarButtonItem = barButton
            }
        }
+    
+    // MARK: - Configure Navigation Bar Appearance
+    public func applyNavigationBarAppearance(backgroundColor: UIColor, barButtonTintColor: UIColor) {
+        guard let navigationController = navigationController else { return }
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = backgroundColor
+        appearance.titleTextAttributes = [.foregroundColor: navigationTitleColor,
+                                          .font: navigationTitleFont]
+
+        navigationController.navigationBar.standardAppearance = appearance
+        navigationController.navigationBar.scrollEdgeAppearance = appearance
+
+        navigationController.navigationBar.tintColor = barButtonTintColor
+        
+    }
 
 }
