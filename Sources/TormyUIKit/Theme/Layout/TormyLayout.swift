@@ -8,9 +8,6 @@
 import UIKit
 
 public struct LayoutConfigure {
-    //TODO: 6x de eklensin
-    //TODO: Toastda alert mesaj uzayınca alt satıra geçsin navbarın da üstünde çıksın
-    //TODO: Loading şart ACİL !!
     public var buttonHeight: CGFloat
     public var cornerRadius: CGFloat
     public var margin: CGFloat

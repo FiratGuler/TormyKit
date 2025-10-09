@@ -65,11 +65,17 @@ public final class ToastView: UIView {
         label.text = message
         label.textColor = TormyColors.greyScale900
         label.font = TormyFonts.medium_medium
+        label.numberOfLines = 0           // Çok satırlı
+        label.lineBreakMode = .byWordWrapping
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         
         addSubview(label)
         label.snp.makeConstraints { make in
             make.left.equalTo(iconView.snp.right).offset(8)
-            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-16) 
+            make.top.equalToSuperview().offset(8)     
+            make.bottom.equalToSuperview().offset(-8)
         }
     }
 }
