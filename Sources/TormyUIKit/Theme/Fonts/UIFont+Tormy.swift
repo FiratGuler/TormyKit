@@ -1,109 +1,14 @@
 //
-//  TormyFonts.swift
-//  Wordy
+//  UIFont+Tormy.swift
+//  TormyKit
 //
-//  Created by Fırat Güler on 7.09.2025.
+//  Created by Fırat Güler on 9.10.2025.
 //
 
 import UIKit
 
-// MARK: - Theme Configs
 
-public struct FontConfigure {
-    public var fontNames: [TormyFonts.FontType: String]
-    
-    public init(black: String ,extraBold: String ,bold: String, semiBold: String, medium: String, regular: String) {
-        self.fontNames = [
-            .black: black,
-            .extraBold: extraBold,
-            .bold: bold,
-            .semiBold: semiBold,
-            .medium: medium,
-            .regular: regular
-        ]
-    }
-}
-
-public struct FontSizeConfigure {
-    public var fontSizes: [TormyFonts.FontSize: CGFloat]
-    
-    public init(h1: CGFloat, h2: CGFloat, h3: CGFloat, h4: CGFloat, h5: CGFloat,
-                xLarge: CGFloat, large: CGFloat, medium: CGFloat, small: CGFloat, xSmall: CGFloat) {
-        self.fontSizes = [
-            .h1: h1, .h2: h2, .h3: h3, .h4: h4, .h5: h5,
-            .xLarge: xLarge, .large: large, .medium: medium, .small: small, .xSmall: xSmall
-        ]
-    }
-}
-
-// MARK: - TormyFonts
-
-@MainActor
-public struct TormyFonts {
-    
-    public enum FontType { case black, extraBold, bold, semiBold, medium, regular }
-    public enum FontSize { case h1, h2, h3, h4, h5, xLarge, large, medium, small, xSmall }
-
-    private static var themeFont: FontConfigure = FontConfigure(black: "HelveticaNeue-Black",
-                                                                extraBold: "HelveticaNeue-ExtraBold",
-                                                                bold: "HelveticaNeue-Bold",
-                                                                semiBold: "HelveticaNeue-Medium",
-                                                                medium: "HelveticaNeue",
-                                                                regular: "HelveticaNeue-Light")
-    
-    private static var themeFontSize: FontSizeConfigure = FontSizeConfigure(
-        h1: 34, h2: 28, h3: 24, h4: 20, h5: 18,
-        xLarge: 32, large: 24, medium: 16, small: 14, xSmall: 12
-    )
-    
-    private static var fontCache: [String: UIFont] = [:]
-    
-    private init() {}
-    
-    // MARK: - Configure
-    
-    static func configure(themeFont: FontConfigure? = nil,
-                                 themeFontSize: FontSizeConfigure? = nil) {
-        if let font = themeFont { self.themeFont = font }
-        if let size = themeFontSize { self.themeFontSize = size }
-        fontCache.removeAll()
-        validateFonts()
-    }
-    
-    // MARK: - Validate
-    private static func validateFonts() {
-        var missingFonts: [String] = []
-        
-        for (type, fontName) in themeFont.fontNames {
-            if UIFont(name: fontName, size: 12) == nil {
-                missingFonts.append("'\(fontName)' (\(type))")
-            }
-        }
-        
-        if missingFonts.isEmpty {
-            TCore.log("Tüm fontlar başarıyla tanımlandı", type: .config)
-
-        } else {
-            for missing in missingFonts {
-                TCore.log("Tanımlanan font bulunamadı: \(missing)", type: .error)
-                
-            }
-        }
-    }
-    
-    // MARK: - Font Access
-    static func font(type: FontType, size: FontSize) -> UIFont {
-        let key = "\(type)-\(size)"
-        if let cached = fontCache[key] { return cached }
-        
-        let fontName = themeFont.fontNames[type] ?? ""
-        let fontSize = themeFontSize.fontSizes[size] ?? 14
-        let uiFont = UIFont(name: fontName, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
-        
-        fontCache[key] = uiFont
-        return uiFont
-    }
-    
+public extension TormyFonts {
     // H1
     public static var h1_black: UIFont { font(type: .black, size: .h1) }
     public static var h1_ExtraBold: UIFont { font(type: .extraBold, size: .h1) }
@@ -183,5 +88,5 @@ public struct TormyFonts {
     public static var xSmall_semiBold: UIFont { font(type: .semiBold, size: .xSmall) }
     public static var xSmall_medium: UIFont { font(type: .medium, size: .xSmall) }
     public static var xSmall_regular: UIFont { font(type: .regular, size: .xSmall) }
-
+    
 }
