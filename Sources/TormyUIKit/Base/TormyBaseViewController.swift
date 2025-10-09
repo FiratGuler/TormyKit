@@ -13,19 +13,30 @@ open class TormyBaseViewController: UIViewController {
     open var appBackground: UIColor { TormyColors.neutral900 }
     
     // MARK: - NavigationBar
+    var previousAppearance: UINavigationBarAppearance?
     open var navigationTitleText: String { "" }
-    open var navigationTitleColor: UIColor { TormyColors.primary900 }
-    open var navigationTitleFont: UIFont { TormyFonts.h4_bold }
+    open var navigationTitleColor: UIColor { .black }
+    open var navigationTitleFont: UIFont { .boldSystemFont(ofSize: 18) }
+    open var navigationBackgroundColor: UIColor? { nil }
     open var hideBackButtonText: Bool { false }
-    
+    open var navigationTintColor: UIColor? { nil }
+
+    // MARK: - Lifecycle
     override open func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = appBackground
-        configureNavigationTitle()
-        applyBackButtonTextVisibility()
+
     }
     
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        saveAndApplyNavigationStyle()
+    }
     
+    override open func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        restorePreviousNavigationStyle()
+    }
     
     // MARK: - Keybord Dismiss
     public func addTapGestureToDismissKeyboard() {
@@ -40,7 +51,6 @@ open class TormyBaseViewController: UIViewController {
     
     // MARK: - Alert
     // MARK: Toast
-    // Şu anda ekranda gösterilen toast
     private var currentToast: UIView?
     
     /// Tek fonksiyon ile hem mesajlı toast hem icon toast gösterebilirsin

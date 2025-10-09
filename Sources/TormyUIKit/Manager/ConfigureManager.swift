@@ -7,51 +7,36 @@
 
 import UIKit
 
-
-import UIKit
-
 // MARK: - Struct for Navigation Bar Style
-public struct NavigationBarStyle {
-    public var backgroundColor: UIColor?
-    public var titleColor: UIColor?
-    public var largeTitleColor: UIColor?
-    public var tintColor: UIColor?
-    public var titleFont: UIFont?
-    public var largeTitleFont: UIFont?
-    public var hideBackButtonText: Bool
-    
-    public init(backgroundColor: UIColor? = nil, titleColor: UIColor? = nil, largeTitleColor: UIColor? = nil, tintColor: UIColor? = nil, titleFont: UIFont? = nil, largeTitleFont: UIFont? = nil, hideBackButtonText: Bool = false ) {
-        self.backgroundColor = backgroundColor
-        self.titleColor = titleColor
-        self.largeTitleColor = largeTitleColor
-        self.tintColor = tintColor
-        self.titleFont = titleFont
-        self.largeTitleFont = largeTitleFont
-        self.hideBackButtonText = hideBackButtonText
-    }
-}
 
 @MainActor
 public final class ConfigureManager {
     public static let shared = ConfigureManager()
     
+    public var globalNavigationStyle: NavigationBarStyle?
     public var isLocalizableDebugEnabled: Bool = true
     
     private init() {}
     
+    // MARK: - Colors
     public func applyColors(_ theme: ColorConfigure) {
         TormyColors.configure(theme: theme)
     }
     
+    // MARK: - Font
     public func applyFont(themeFont: FontConfigure, themeFontSize: FontSizeConfigure) {
         TormyFonts.configure(themeFont: themeFont, themeFontSize: themeFontSize)
     }
     
+    // MARK: - Layout
     public func applyLayout(_ layout: LayoutConfigure) {
         TormyLayout.configure(layout)
     }
     
+    // MARK: - Navigation Style
     public func applyNavigationBarStyles(_ style: NavigationBarStyle) {
+        globalNavigationStyle = style
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         
@@ -104,6 +89,6 @@ public final class ConfigureManager {
         
         
     }
-    
+
 }
 

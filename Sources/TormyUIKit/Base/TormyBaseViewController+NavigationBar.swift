@@ -12,7 +12,52 @@ extension TormyBaseViewController {
     public enum BarButtonSide {
         case left
         case right
-    }    
+    }
+    
+    func saveAndApplyNavigationStyle() {
+        guard let navBar = navigationController?.navigationBar else { return }
+        
+        // Önceki görünümü sakla
+        previousAppearance = navBar.standardAppearance
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = navigationBackgroundColor ?? ConfigureManager.shared.globalNavigationStyle?.backgroundColor ?? .white
+        
+        // Title
+        appearance.titleTextAttributes = [
+            .foregroundColor: navigationTitleColor,
+            .font: navigationTitleFont
+        ]
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: navigationTitleColor,
+            .font: navigationTitleFont
+        ]
+        
+        // Back button
+        if hideBackButtonText {
+            let backButtonAppearance = UIBarButtonItemAppearance()
+            backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+            backButtonAppearance.highlighted.titleTextAttributes = [.foregroundColor: UIColor.clear]
+            appearance.backButtonAppearance = backButtonAppearance
+        }
+        
+        navBar.standardAppearance = appearance
+        navBar.scrollEdgeAppearance = appearance
+        navBar.compactAppearance = appearance
+        navBar.tintColor = navigationTintColor ?? ConfigureManager.shared.globalNavigationStyle?.tintColor ?? .systemBlue
+        
+        configureNavigationTitle()
+        applyBackButtonTextVisibility()
+    }
+    
+    func restorePreviousNavigationStyle() {
+        guard let navBar = navigationController?.navigationBar,
+              let prev = previousAppearance else { return }
+        navBar.standardAppearance = prev
+        navBar.scrollEdgeAppearance = prev
+        navBar.compactAppearance = prev
+    }
     
     // MARK: - Configure Navigation Title
     func configureNavigationTitle() {
