@@ -34,13 +34,31 @@ open class TormyBaseViewController: UIViewController {
         style.titleColor = navigationBarTitleColor()
         style.largeTitleColor = navigationBarLargeTitleColor()
         style.tintColor = navigationBarTintColor()
+        style.titleFont = navigationBarTitleFont()
+        style.largeTitleFont = navigationBarLargeTitleFont()
         style.hideBackButtonText = navigationBarHideBackText()
         
         ConfigureManager.shared.applyNavigationStyle(style, to: navigationController?.navigationBar)
+        
+        if let navTitle = navigationBarTitle() {
+            navigationItem.title = navTitle
+        }
+        
+        if style.hideBackButtonText {
+            if #available(iOS 14.0, *) {
+                navigationItem.backButtonDisplayMode = .minimal
+            }
+            navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        }
     }
+
     
     // MARK: - Navigation Bar
     
+    open func navigationBarTitle() -> String? {
+        return nil
+    }
+
     open func navigationBarBackground() -> UIColor? {
         return ConfigureManager.shared.globalNavigationStyle?.backgroundColor
     }
