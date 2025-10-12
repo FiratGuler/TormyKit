@@ -35,60 +35,106 @@ public final class ConfigureManager {
     
     // MARK: - Navigation Style
     public func applyNavigationBarStyles(_ style: NavigationBarStyle) {
-        globalNavigationStyle = style
+            globalNavigationStyle = style
+            
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = style.backgroundColor ?? .white
+            
+            // Title
+            var titleAttributes: [NSAttributedString.Key: Any] = [:]
+            titleAttributes[.foregroundColor] = style.titleColor ?? .black
+            if let font = style.titleFont {
+                titleAttributes[.font] = font
+            }
+            appearance.titleTextAttributes = titleAttributes
+            
+            // Large Title
+            var largeTitleAttributes: [NSAttributedString.Key: Any] = [:]
+            largeTitleAttributes[.foregroundColor] = style.largeTitleColor ?? .black
+            if let font = style.largeTitleFont {
+                largeTitleAttributes[.font] = font
+            }
+            appearance.largeTitleTextAttributes = largeTitleAttributes
+            
+            // Back button text
+            if style.hideBackButtonText {
+                let backButtonAppearance = UIBarButtonItemAppearance()
+                backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+                backButtonAppearance.highlighted.titleTextAttributes = [.foregroundColor: UIColor.clear]
+                appearance.backButtonAppearance = backButtonAppearance
+            }
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            UINavigationBar.appearance().compactAppearance = appearance
+            UINavigationBar.appearance().tintColor = style.tintColor ?? .systemBlue
+        }
+
+}
+// MARK: - Navbar
+extension ConfigureManager {
+    
+    /// Uygulanacak navigation bar stilini belirler (global + local override)
+    public func applyNavigationStyle(_ localStyle: NavigationBarStyle? = nil,
+                                     to navigationBar: UINavigationBar?) {
+        guard let navBar = navigationBar else { return }
+        
+        let global = globalNavigationStyle
+        
+        let merged = merge(global: global, local: localStyle)
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = merged.backgroundColor ?? .systemBackground
         
-        // Background
-        if let bgColor = style.backgroundColor {
-            appearance.backgroundColor = bgColor
-        } else {
-            appearance.backgroundColor = .white
-        }
-        
-        // Title
         var titleAttributes: [NSAttributedString.Key: Any] = [:]
-        if let titleColor = style.titleColor {
+        if let titleColor = merged.titleColor {
             titleAttributes[.foregroundColor] = titleColor
-        } else {
-            titleAttributes[.foregroundColor] = UIColor.black
         }
-        if let titleFont = style.titleFont {
+        if let titleFont = merged.titleFont {
             titleAttributes[.font] = titleFont
         }
         appearance.titleTextAttributes = titleAttributes
         
-        // Large title
         var largeTitleAttributes: [NSAttributedString.Key: Any] = [:]
-        if let largeTitleColor = style.largeTitleColor {
+        if let largeTitleColor = merged.largeTitleColor {
             largeTitleAttributes[.foregroundColor] = largeTitleColor
-        } else {
-            largeTitleAttributes[.foregroundColor] = UIColor.black
         }
-        if let largeTitleFont = style.largeTitleFont {
+        if let largeTitleFont = merged.largeTitleFont {
             largeTitleAttributes[.font] = largeTitleFont
         }
         appearance.largeTitleTextAttributes = largeTitleAttributes
         
-        // Back button text’i gizle
-        if style.hideBackButtonText {
+        if merged.hideBackButtonText {
             let backButtonAppearance = UIBarButtonItemAppearance()
             backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
             backButtonAppearance.highlighted.titleTextAttributes = [.foregroundColor: UIColor.clear]
             appearance.backButtonAppearance = backButtonAppearance
         }
         
-        // Apply
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
+        navBar.standardAppearance = appearance
+        navBar.scrollEdgeAppearance = appearance
+        navBar.compactAppearance = appearance
         
-        // Tint
-        UINavigationBar.appearance().tintColor = style.tintColor ?? .systemBlue
+        if let tintColor = merged.tintColor {
+            navBar.tintColor = tintColor
+        }
         
-        
+        if merged.hideBackButtonText {
+            navBar.topItem?.backButtonTitle = ""
+        }
     }
-
+    
+    private func merge(global: NavigationBarStyle?, local: NavigationBarStyle?) -> NavigationBarStyle {
+        return NavigationBarStyle(
+            backgroundColor: local?.backgroundColor ?? global?.backgroundColor,
+            titleColor: local?.titleColor ?? global?.titleColor,
+            largeTitleColor: local?.largeTitleColor ?? global?.largeTitleColor,
+            tintColor: local?.tintColor ?? global?.tintColor,
+            titleFont: local?.titleFont ?? global?.titleFont,
+            largeTitleFont: local?.largeTitleFont ?? global?.largeTitleFont,
+            hideBackButtonText: local?.hideBackButtonText ?? global?.hideBackButtonText ?? false
+        )
+    }
 }
-

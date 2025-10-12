@@ -10,17 +10,13 @@ import SnapKit
 
 open class TormyBaseViewController: UIViewController {
     
+    public enum BarButtonSide {
+        case left
+        case right
+    }
+    
     open var appBackground: UIColor { TormyColors.neutral900 }
-    
-    // MARK: - NavigationBar
-    var previousAppearance: UINavigationBarAppearance?
-    open var navigationTitleText: String { "" }
-    open var navigationTitleColor: UIColor { .black }
-    open var navigationTitleFont: UIFont { .boldSystemFont(ofSize: 18) }
-    open var navigationBackgroundColor: UIColor? { nil }
-    open var hideBackButtonText: Bool { false }
-    open var navigationTintColor: UIColor? { nil }
-    
+
     var currentToast: UIView?
 
     // MARK: - Lifecycle
@@ -29,15 +25,65 @@ open class TormyBaseViewController: UIViewController {
         view.backgroundColor = appBackground
 
     }
-    
+   
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        saveAndApplyNavigationStyle()
+        
+        var style = NavigationBarStyle()
+        style.backgroundColor = navigationBarBackground()
+        style.titleColor = navigationBarTitleColor()
+        style.largeTitleColor = navigationBarLargeTitleColor()
+        style.tintColor = navigationBarTintColor()
+        style.hideBackButtonText = navigationBarHideBackText()
+        
+        ConfigureManager.shared.applyNavigationStyle(style, to: navigationController?.navigationBar)
     }
     
-    override open func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        restorePreviousNavigationStyle()
+    // MARK: - Navigation Bar
+    
+    open func navigationBarBackground() -> UIColor? {
+        return ConfigureManager.shared.globalNavigationStyle?.backgroundColor
+    }
+
+    open func navigationBarTitleColor() -> UIColor? {
+        return ConfigureManager.shared.globalNavigationStyle?.titleColor
+    }
+
+    open func navigationBarLargeTitleColor() -> UIColor? {
+        return ConfigureManager.shared.globalNavigationStyle?.largeTitleColor
+    }
+
+    open func navigationBarTintColor() -> UIColor? {
+        return ConfigureManager.shared.globalNavigationStyle?.tintColor
+    }
+
+    open func navigationBarTitleFont() -> UIFont? {
+        return ConfigureManager.shared.globalNavigationStyle?.titleFont
+    }
+
+    open func navigationBarLargeTitleFont() -> UIFont? {
+        return ConfigureManager.shared.globalNavigationStyle?.largeTitleFont
+    }
+
+    open func navigationBarHideBackText() -> Bool {
+        return ConfigureManager.shared.globalNavigationStyle?.hideBackButtonText ?? false
+    }
+    
+    public func setBarButton(side: BarButtonSide, image: UIImage, tintColor: UIColor = .systemBlue, target: Any?, action: Selector?) {
+        let button = UIButton(type: .system)
+        button.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = tintColor
+        if let action = action {
+            button.addTarget(target, action: action, for: .touchUpInside)
+        }
+        let barButton = UIBarButtonItem(customView: button)
+        
+        switch side {
+        case .left:
+            navigationItem.leftBarButtonItem = barButton
+        case .right:
+            navigationItem.rightBarButtonItem = barButton
+        }
     }
     
     // MARK: - Keybord Dismiss
