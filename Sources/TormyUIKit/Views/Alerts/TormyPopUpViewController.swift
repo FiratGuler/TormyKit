@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-public final class PopUpViewController: UIViewController {
+public final class TormyPopUpViewController: UIViewController {
 
-    private let popup: PopUpView
+    private let popup: TormyPopUpView
     private let backgroundView = UIView()
 
     // MARK: - Init
-    public init(popup: PopUpView) {
+    public init(popup: TormyPopUpView) {
         self.popup = popup
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen

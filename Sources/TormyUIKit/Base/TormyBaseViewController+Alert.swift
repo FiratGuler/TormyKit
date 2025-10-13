@@ -91,14 +91,14 @@ extension TormyBaseViewController {
                           negativeButton: String? = nil,
                           negativeAction: (() -> Void)? = nil) {
         
-        let popup = PopUpView(title: title,
+        let popup = TormyPopUpView(title: title,
                               message: message,
                               positiveButton: positiveButton,
                               positiveAction: positiveAction,
                               negativeButton: negativeButton,
                               negativeAction: negativeAction)
         
-        let popupVC = PopUpViewController(popup: popup)
+        let popupVC = TormyPopUpViewController(popup: popup)
         present(popupVC, animated: true)
     }
 }

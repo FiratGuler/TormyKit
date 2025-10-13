@@ -33,48 +33,53 @@ public final class ConfigureManager {
         TormyLayout.configure(layout)
     }
     
-    // MARK: - Navigation Style
-    public func applyNavigationBarStyles(_ style: NavigationBarStyle) {
-            globalNavigationStyle = style
-            
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = style.backgroundColor ?? .white
-            
-            // Title
-            var titleAttributes: [NSAttributedString.Key: Any] = [:]
-            titleAttributes[.foregroundColor] = style.titleColor ?? .black
-            if let font = style.titleFont {
-                titleAttributes[.font] = font
-            }
-            appearance.titleTextAttributes = titleAttributes
-            
-            // Large Title
-            var largeTitleAttributes: [NSAttributedString.Key: Any] = [:]
-            largeTitleAttributes[.foregroundColor] = style.largeTitleColor ?? .black
-            if let font = style.largeTitleFont {
-                largeTitleAttributes[.font] = font
-            }
-            appearance.largeTitleTextAttributes = largeTitleAttributes
-            
-            // Back button text
-            if style.hideBackButtonText {
-                let backButtonAppearance = UIBarButtonItemAppearance()
-                backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
-                backButtonAppearance.highlighted.titleTextAttributes = [.foregroundColor: UIColor.clear]
-                appearance.backButtonAppearance = backButtonAppearance
-            }
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            UINavigationBar.appearance().compactAppearance = appearance
-            UINavigationBar.appearance().tintColor = style.tintColor ?? .systemBlue
-        }
-
+    // MARK: - PopUp
+    public func applyPopUp(_ configure: TormyPopUpStyles) {
+        TormyPopUp.configure(configure)
+    }
+    
+    
+    
 }
 // MARK: - Navbar
 extension ConfigureManager {
-    
+    // Navigation Style
+    public func applyNavigationBarStyles(_ style: NavigationBarStyle) {
+        globalNavigationStyle = style
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = style.backgroundColor ?? .white
+        
+        // Title
+        var titleAttributes: [NSAttributedString.Key: Any] = [:]
+        titleAttributes[.foregroundColor] = style.titleColor ?? .black
+        if let font = style.titleFont {
+            titleAttributes[.font] = font
+        }
+        appearance.titleTextAttributes = titleAttributes
+        
+        // Large Title
+        var largeTitleAttributes: [NSAttributedString.Key: Any] = [:]
+        largeTitleAttributes[.foregroundColor] = style.largeTitleColor ?? .black
+        if let font = style.largeTitleFont {
+            largeTitleAttributes[.font] = font
+        }
+        appearance.largeTitleTextAttributes = largeTitleAttributes
+        
+        // Back button text
+        if style.hideBackButtonText {
+            let backButtonAppearance = UIBarButtonItemAppearance()
+            backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+            backButtonAppearance.highlighted.titleTextAttributes = [.foregroundColor: UIColor.clear]
+            appearance.backButtonAppearance = backButtonAppearance
+        }
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().tintColor = style.tintColor ?? .systemBlue
+    }
     /// Uygulanacak navigation bar stilini belirler (global + local override)
     public func applyNavigationStyle(_ localStyle: NavigationBarStyle? = nil,
                                      to navigationBar: UINavigationBar?) {
