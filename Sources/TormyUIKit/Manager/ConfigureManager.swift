@@ -92,6 +92,7 @@ extension ConfigureManager {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = merged.backgroundColor ?? .systemBackground
+        appearance.shadowColor = .clear
         
         var titleAttributes: [NSAttributedString.Key: Any] = [:]
         if let titleColor = merged.titleColor {
