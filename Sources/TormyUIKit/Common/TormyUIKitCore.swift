@@ -14,13 +14,14 @@ public final class TCore {
     
     // MARK: - Logs
 
-    public enum LogType { case debug, error, success, config
+    public enum LogType { case debug, error, success, config, test
         var emoji: String {
             switch self {
             case .debug:  "🐞🐞🐞"
             case .error: "🆘‼️🆘"
             case .success: "✅✅✅"
             case .config : "⚙️⚙️⚙️"
+            case .test: "〽️〽️〽️"
             }
         }
 }
@@ -34,7 +35,7 @@ public final class TCore {
     #if DEBUG
         let fileName = (file as NSString).lastPathComponent
         switch type {
-        case .debug, .error, .success:
+        case .debug, .error, .success, .test:
             if showMeta {
                 print("""
                 \(type.emoji) TORMYKIT ─────────────────────────────
